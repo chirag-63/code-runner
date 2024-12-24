@@ -14,11 +14,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { Download } from 'lucide-react';
 import { CodeEditor } from './editorPanel';
 import { InputPanel } from './input';
 import { OutputPanel } from './output';
-import { ModeToggle } from '../theme-toggle';
-import { Download } from 'lucide-react';
 
 function OnlineCompilerContent() {
     const { changeTheme, language, changeLanguage } = useCodeEditorContext();
@@ -57,13 +56,13 @@ function OnlineCompilerContent() {
                     <CodeEditor />
                 </ResizablePanel>
                 <ResizableHandle withHandle className={"border-2 border-secondary"} />
-                <ResizablePanel defaultSize={30} className='min-w-[30%]'>
+                <ResizablePanel defaultSize={30}>
                     <ResizablePanelGroup direction="vertical">
                         <ResizablePanel defaultSize={40}>
                             <InputPanel />
                         </ResizablePanel>
                         <ResizableHandle withHandle className={"border-2 border-secondary"} />
-                        <ResizablePanel defaultSize={60} className='min-h-[35%]'>
+                        <ResizablePanel defaultSize={60}>
                             <OutputPanel />
                         </ResizablePanel>
                     </ResizablePanelGroup>
