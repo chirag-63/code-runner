@@ -1,6 +1,6 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import { PrismaClient } from "@prisma/client";
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -9,7 +9,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         GoogleProvider({
             clientId: process.env.AUTH_GOOGLE_ID,
             clientSecret: process.env.AUTH_GOOGLE_SECRET,
-        })
+        }),
     ],
     secret: process.env.AUTH_SECRET,
     callbacks: {
@@ -31,8 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                                 name,
                             },
                         });
-                    }
-                    else {
+                    } else {
                         await prisma.user.update({
                             where: { email },
                             data: {
@@ -46,6 +45,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     return false;
                 }
             }
-        }
+        },
     },
-})
+});

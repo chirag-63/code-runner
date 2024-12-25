@@ -1,16 +1,21 @@
-'use client'
+'use client';
 
-import { defaultCode } from '@/components/codeEditor/SampleCode';
+import { defaultFile } from '@/components/codeEditor/SampleCode';
 import { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
 
-
-export function useCodeEditor(){
+export function useCodeEditor() {
     const editorRef = useRef(null);
     const { theme: nextTheme, setTheme: setNextTheme } = useTheme();
-    const [theme, setTheme] = useState(() => nextTheme === 'dark' ? 'vs-dark' : 'light');
+    const [theme, setTheme] = useState(() =>
+        nextTheme === 'dark' ? 'vs-dark' : 'light',
+    );
     const [language, setLanguage] = useState('cpp');
-    const [code, setCode] = useState(defaultCode['cpp']);
+    const [code, setCode] = useState(defaultFile['cpp']?.content);
+    const [fileName, setFileName] = useState(defaultFile['cpp'].fileName);
+    const [extension, setExtension] = useState(defaultFile['cpp'].extension);
+    const [input, setInput] = useState('');
+    const [output, setOutput] = useState('');
 
     useEffect(() => {
         if (nextTheme === 'dark') {
@@ -19,14 +24,6 @@ export function useCodeEditor(){
             setTheme('light');
         }
     }, [nextTheme]);
-
-    // function changeTheme() {
-    //     console.log("hello theme")
-    //     const newTheme = theme === 'vs-dark' ? 'light' : 'vs-dark';
-    //     setTheme(newTheme);
-    //     localStorage.setItem('CodeEditorTheme', newTheme);
-    // }
-
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -47,11 +44,10 @@ export function useCodeEditor(){
         };
     }, [code]);
 
-    function changeLanguage(event) {
-        console.log(event)
-        const newLanguage = event;
+    function changeLanguage(newLanguage) {
         setLanguage(newLanguage);
-        setCode(defaultCode[newLanguage]);
+        setExtension(defaultFile[newLanguage].extension);
+        setCode(defaultFile[newLanguage].content);
         localStorage.setItem('PreferredLanguage', newLanguage);
     }
 
@@ -61,9 +57,14 @@ export function useCodeEditor(){
         setTheme,
         language,
         setLanguage,
-        code, 
+        code,
         setCode,
-        // changeTheme, 
-        changeLanguage
-    }
+        changeLanguage,
+        fileName,
+        extension,
+        input,
+        setInput,
+        output,
+        setOutput,
+    };
 }

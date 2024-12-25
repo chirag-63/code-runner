@@ -1,26 +1,23 @@
 'use client';
-import React from 'react';
 import { Textarea } from '@/components/ui/textarea';
-import NextTopLoader from 'nextjs-toploader';
 
-export function OutputPanel() {
-    // use skeleton loaders
+export function OutputPanel({ output }) {
     return (
-        <div className="w-full h-full">
-            <div className='h-14 flex flex-col justify-around items-center border-2 border-secondary'>
-                <div className='text-sm border-b border-secondary text-center w-full font-mono'>
+        <div className="h-full w-full">
+            <div className="flex h-7 flex-col items-center justify-around border-2 border-secondary">
+                <div className="w-full border-secondary text-center font-mono text-sm">
                     Output
                 </div>
-                <div className='text-xs flex justify-around items-center w-full font-mono'>
+                {/* <div className='text-xs flex justify-around items-center w-full font-mono'>
                     <div>Time</div>
                     <div>Memory</div>
-                </div>
+                </div> */}
             </div>
             <Textarea
                 placeholder="Click on 'Run' to see the Output."
-                className="h-full w-full focus:outline-none border-none resize-none text-sm font-mono rounded-none"
+                className="h-full w-full resize-none rounded-none border-none font-mono text-sm focus:outline-none"
                 readOnly
-                // disabled
+                value={output}
             />
         </div>
     );

@@ -1,21 +1,22 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { useCodeEditorContext } from './codeEditorContext';
 import { useTheme } from 'next-themes';
 
-export function InputPanel() {
-
+export function InputPanel({ input, setInput }) {
     return (
-        <div className="w-full h-full text-sm">
-            <div className='h-7 flex flex-col justify-around items-center border-2 border-secondary'>
-                <div className='text-sm border-secondary text-center w-full font-mono'>
+        <div className="h-full w-full text-sm">
+            <div className="flex h-7 flex-col items-center justify-around border-2 border-secondary">
+                <div className="w-full border-secondary text-center font-mono text-sm">
                     Input
                 </div>
             </div>
             <Textarea
                 placeholder="Input for the program (optional)."
-                className="h-full w-full focus:outline-none border-none resize-none font-mono rounded-none"
+                className="h-full w-full resize-none rounded-none border-none font-mono focus:outline-none"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
             />
         </div>
     );

@@ -1,9 +1,9 @@
 // import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "@/components/navbar/navbar";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider"
-import { ModeToggle } from "@/components/theme-toggle";
-import NextTopLoader from "nextjs-toploader";
+import Navbar from '@/components/navbar/navbar';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
+import { ModeToggle } from '@/components/theme-toggle';
+import NextTopLoader from 'nextjs-toploader';
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -21,26 +21,24 @@ import NextTopLoader from "nextjs-toploader";
 // };
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-      // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {/* <ModeToggle /> */}
-          <NextTopLoader
-            height={2}
-            showSpinner={false}
-          />
-          <Navbar />
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body
+                suppressHydrationWarning
+                // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    {/* <ModeToggle /> */}
+                    <NextTopLoader height={2} showSpinner={false} />
+                    <Navbar />
+                    {children}
+                </ThemeProvider>
+            </body>
+        </html>
+    );
 }

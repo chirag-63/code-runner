@@ -1,15 +1,13 @@
-import { OnlineCompiler } from "@/components/codeEditor/onlineCompiler"
+import { OnlineCompiler } from '@/components/codeEditor/onlineCompiler';
 
 export default function Page() {
-  return (
-    <OnlineCompiler/>
-  )
+    return <OnlineCompiler />;
 }
 
-//use components like dialog, alert dialog, avatar, button, drawer, form, 
+//use components like dialog, alert dialog, avatar, button, drawer, form,
 // resizable, select, sheet, sidebar, skeleton, switch, tooltip, toast
 // add compilation error in toast
-// copy code button 
+// copy code button
 // code file download with extension
 // signin to save and toast for code saved
 // 1. Implement Auto complete for all languages ---- LEVEL HARD
@@ -22,5 +20,5 @@ export default function Page() {
 // 8. Output window UI  ---- DONE
 // 9. Own judge0 instance ---- LEVEL HARD
 //Set base64 string to utf8 and format string for output
-//Use redis, learn state management library, dont use normal inbuilt hooks of react 
+//Use redis, learn state management library, dont use normal inbuilt hooks of react
 // web sockets ---- MAYBE
