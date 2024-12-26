@@ -4,8 +4,8 @@ import { Editor } from '@monaco-editor/react';
 import { defaultFile } from './SampleCode';
 
 export function CodeEditor() {
-    const { editorRef, theme, setTheme, language, setLanguage, code, setCode } =
-        useCodeEditorContext();
+    const { editorRef, theme, setTheme, language, setLanguage, code, setCode, fontSize
+    } = useCodeEditorContext();
 
     function handleEditorChange(value, event) {
         // here is the current value
@@ -46,12 +46,11 @@ export function CodeEditor() {
                 theme={theme}
                 onMount={handleEditorDidMount}
                 loading={
-                    <div className="custom-loader flex h-full w-full items-center justify-center">
-                        <div className="loader">
-                            <span>Add Custom Skeleton Loaders...</span>
-                        </div>
-                    </div>
+                    <div className="flex h-full w-full items-center bg-[rgb(30,30,30)] justify-center"></div>
                 }
+                options={{
+                    fontSize: fontSize
+                }}
             />
         </div>
     );

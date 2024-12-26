@@ -22,6 +22,7 @@ import { executeCode } from '../../../actions/OnlineJudge';
 import { CodeEditor } from './editorPanel';
 import { InputPanel } from './input';
 import { OutputPanel } from './output';
+import { Slider } from "@/components/ui/slider"
 
 function OnlineCompilerContent() {
     const {
@@ -31,12 +32,18 @@ function OnlineCompilerContent() {
         extension,
         setOutput,
         output,
+        fontSize,
+        setFontSize,
         editorRef,
         input,
         setInput,
+        loadingOutput,
+        setLoadingOutput
     } = useCodeEditorContext();
 
     const runHandler = async () => {
+        setLoadingOutput(true);
+        console.log(theme)
         try {
             const response = await executeCode(
                 language,
@@ -48,6 +55,8 @@ function OnlineCompilerContent() {
         } catch (error) {
             // console.error("Error executing code:", error);
             throw error;
+        } finally {
+            setLoadingOutput(false);
         }
     };
 
@@ -58,6 +67,7 @@ function OnlineCompilerContent() {
             '.java': { mimeType: 'text/x-java-source', fileExtension: 'java' },
             '.py': { mimeType: 'text/x-python', fileExtension: 'py' },
             '.js': { mimeType: 'application/javascript', fileExtension: 'js' },
+            '.go': { mimeType: 'text/x-go', fileExtension: 'go' },
         };
 
         const { mimeType = 'text/plain', fileExtension = 'txt' } =
@@ -89,15 +99,28 @@ function OnlineCompilerContent() {
                     >
                         Run
                     </Button>
-                    <Button className="h-7 w-16 py-2 font-medium">
-                        Invite
-                    </Button>
+                    <div className='flex w-32 gap-2 bg-primary-foreground rounded-lg h-full items-center px-3 hover:cursor-pointer select-none text-sm '>
+                        <div>
+                            Font
+                        </div>
+                        <Slider
+                            defaultValue={[fontSize]}
+                            max={20}
+                            min={12}
+                            step={1}
+                            onValueChange={(val) => setFontSize(val[0])}
+                        />
+                    </div>
+                    {/* <Button className="h-7 w-16 px-5 py-2 font-medium">
+                        Publish
+                    </Button> */}
                     <Button
                         onClick={downloadCode}
                         className="h-7 w-10 py-2 font-medium"
                     >
                         <Download />
                     </Button>
+
                     <Select value={language} onValueChange={changeLanguage}>
                         <SelectTrigger className="h-8 w-[120px] bg-primary-foreground">
                             <SelectValue placeholder="Select Language" />
@@ -107,9 +130,8 @@ function OnlineCompilerContent() {
                                 <SelectItem value="cpp">C++</SelectItem>
                                 <SelectItem value="python">Python</SelectItem>
                                 <SelectItem value="java">Java</SelectItem>
-                                <SelectItem value="javascript">
-                                    JavaScript
-                                </SelectItem>
+                                <SelectItem value="javascript">JavaScript</SelectItem>
+                                <SelectItem value="go">Go</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
@@ -139,7 +161,7 @@ function OnlineCompilerContent() {
                             }
                         />
                         <ResizablePanel defaultSize={60}>
-                            <OutputPanel output={output} />
+                            <OutputPanel output={output} loadingOutput={loadingOutput} theme={theme} />
                         </ResizablePanel>
                     </ResizablePanelGroup>
                 </ResizablePanel>

@@ -12,10 +12,11 @@ export function useCodeEditor() {
     );
     const [language, setLanguage] = useState('cpp');
     const [code, setCode] = useState(defaultFile['cpp']?.content);
-    const [fileName, setFileName] = useState(defaultFile['cpp'].fileName);
     const [extension, setExtension] = useState(defaultFile['cpp'].extension);
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
+    const [loadingOutput, setLoadingOutput] = useState(false);
+    const [fontSize, setFontSize] = useState(14);
 
     useEffect(() => {
         if (nextTheme === 'dark') {
@@ -34,7 +35,7 @@ export function useCodeEditor() {
         };
 
         const saveCode = () => {
-            // Here, you can implement saving the code
+            setCode(editorRef.current.getValue());
             alert('Code saved');
         };
 
@@ -48,6 +49,8 @@ export function useCodeEditor() {
         setLanguage(newLanguage);
         setExtension(defaultFile[newLanguage].extension);
         setCode(defaultFile[newLanguage].content);
+        setInput('');
+        setOutput('');
         localStorage.setItem('PreferredLanguage', newLanguage);
     }
 
@@ -60,11 +63,14 @@ export function useCodeEditor() {
         code,
         setCode,
         changeLanguage,
-        fileName,
         extension,
         input,
         setInput,
         output,
         setOutput,
+        loadingOutput,
+        setLoadingOutput,
+        fontSize,
+        setFontSize
     };
 }

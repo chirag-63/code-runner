@@ -8,7 +8,7 @@ int main(){
     return 0;
 }`;
 
-const SamplePythonCode = `## this is a comment
+const SamplePythonCode = `## Online Python Interpreter
 
 print("Hello, World!")`;
 
@@ -23,6 +23,16 @@ class Main {
         System.out.println("Hello, World!");
     }
 }`;
+
+const SampleCodeGo = 
+`//Online Golang Compiler
+
+package main
+import "fmt";
+
+func main() {
+    fmt.Println("Hello, World!")
+}`
 
 export const defaultFile = {
     cpp: {
@@ -49,6 +59,12 @@ export const defaultFile = {
         content: SampleJavascriptCode,
         isMain: true,
     },
+    go: {
+        fileName: 'main',
+        extension: '.go',
+        content: SampleCodeGo,
+        isMain: true
+    }
 };
 
 export const LANGUAGE_VERSIONS = {
@@ -56,4 +72,5 @@ export const LANGUAGE_VERSIONS = {
     java: '15.0.2',
     python: '3.10.0',
     javascript: '18.15.0',
+    go: '1.16.2'
 };

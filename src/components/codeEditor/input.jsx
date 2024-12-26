@@ -1,8 +1,5 @@
 'use client';
-import React, { useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
-import { useCodeEditorContext } from './codeEditorContext';
-import { useTheme } from 'next-themes';
 
 export function InputPanel({ input, setInput }) {
     return (

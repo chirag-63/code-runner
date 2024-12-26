@@ -6,12 +6,13 @@ export default function SignIn() {
         try {
             const response = await handleSignIn();
             if (response?.error) {
-                console.error('Error during sign-in:', response.error);
+                // console.error('Error during sign-in:', response.error);
             } else {
-                console.log('Sign-in successful:', response);
+                // console.log('Sign-in successful:', response);
             }
         } catch (error) {
-            console.error('Error during sign-in:', error);
+            throw error
+            // console.error('Error during sign-in:', error);
         }
     };
 
@@ -20,6 +21,7 @@ export default function SignIn() {
             onClick={handleClick}
             className="ml-2 mr-2 h-9 bg-primary-foreground font-medium text-black hover:bg-secondary dark:text-white"
         >
+            <img className='h-4' src="google.png" alt="" />
             Sign In
         </Button>
     );
