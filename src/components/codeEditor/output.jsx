@@ -1,7 +1,7 @@
 'use client';
 import { Textarea } from '@/components/ui/textarea';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export function OutputPanel({ output, loadingOutput, theme }) {
     return (
@@ -15,12 +15,14 @@ export function OutputPanel({ output, loadingOutput, theme }) {
                     <div>Memory</div>
                 </div> */}
             </div>
-            {loadingOutput
-                ? <div className='mt-1 px-3'>
+            {loadingOutput ? (
+                <div className="mt-1 px-3">
                     <Skeleton
                         count={2}
                         baseColor={theme == 'vs-dark' ? '#1E1E1E' : '#EBEBEB'}
-                        highlightColor={theme == 'vs-dark' ? '#282828' : '#F5F5F5'}
+                        highlightColor={
+                            theme == 'vs-dark' ? '#282828' : '#F5F5F5'
+                        }
                         width={'90%'}
                         borderRadius={'15%'}
                         height={14}
@@ -28,7 +30,9 @@ export function OutputPanel({ output, loadingOutput, theme }) {
                     <Skeleton
                         count={1}
                         baseColor={theme == 'vs-dark' ? '#1E1E1E' : '#EBEBEB'}
-                        highlightColor={theme == 'vs-dark' ? '#282828' : '#F5F5F5'}
+                        highlightColor={
+                            theme == 'vs-dark' ? '#282828' : '#F5F5F5'
+                        }
                         width={'80%'}
                         borderRadius={'15%'}
                         height={14}
@@ -36,19 +40,22 @@ export function OutputPanel({ output, loadingOutput, theme }) {
                     <Skeleton
                         count={1}
                         baseColor={theme == 'vs-dark' ? '#1E1E1E' : '#EBEBEB'}
-                        highlightColor={theme == 'vs-dark' ? '#282828' : '#F5F5F5'}
+                        highlightColor={
+                            theme == 'vs-dark' ? '#282828' : '#F5F5F5'
+                        }
                         width={'60%'}
                         borderRadius={'15%'}
                         height={14}
                     />
                 </div>
-                : < Textarea
+            ) : (
+                <Textarea
                     placeholder="Click on 'Run' to see the Output."
                     className="h-full w-full resize-none rounded-none border-none font-mono text-sm focus:outline-none"
                     readOnly
                     value={output}
                 />
-            }
+            )}
         </div>
     );
 }

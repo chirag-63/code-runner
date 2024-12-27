@@ -1,7 +1,7 @@
-import { OnlineCompiler } from '@/components/codeEditor/onlineCompiler';
+import { OnlineCodeEditor } from '@/components/codeEditor/onlineCodeEditor';
 
 export default function Page() {
-    return <OnlineCompiler />;
+    return <OnlineCodeEditor />;
 }
 
 //use components like drawer, toast

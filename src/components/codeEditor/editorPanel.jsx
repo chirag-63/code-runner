@@ -1,14 +1,20 @@
 'use client';
-import { useCodeEditorContext } from '@/components/codeEditor/codeEditorContext';
 import { Editor } from '@monaco-editor/react';
 import { defaultFile } from './SampleCode';
 
-export function CodeEditor() {
-    const { editorRef, theme, setTheme, language, setLanguage, code, setCode, fontSize
-    } = useCodeEditorContext();
-
+export function EditorPanel({
+    editorRef,
+    theme,
+    setTheme,
+    language,
+    setLanguage,
+    code,
+    setCode,
+    fontSize,
+}) {
     function handleEditorChange(value, event) {
         // here is the current value
+        setCode(value);
     }
 
     function handleEditorWillMount(monaco) {
@@ -29,12 +35,6 @@ export function CodeEditor() {
         setTheme(savedTheme);
         setLanguage(savedLanguage);
         setCode(defaultFile[savedLanguage].content);
-
-        const model = editorRef.current.getModel();
-        if (model) {
-            monaco.editor.setModelLanguage(model, language);
-            model.setValue(defaultFile[language]?.content);
-        }
     }
 
     return (
@@ -45,11 +45,12 @@ export function CodeEditor() {
                 value={code}
                 theme={theme}
                 onMount={handleEditorDidMount}
+                onChange={handleEditorChange}
                 loading={
-                    <div className="flex h-full w-full items-center bg-[rgb(30,30,30)] justify-center"></div>
+                    <div className="flex h-full w-full items-center justify-center bg-[rgb(30,30,30)] hover:cursor-progress"></div>
                 }
                 options={{
-                    fontSize: fontSize
+                    fontSize: fontSize,
                 }}
             />
         </div>

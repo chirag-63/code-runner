@@ -24,15 +24,14 @@ class Main {
     }
 }`;
 
-const SampleCodeGo = 
-`//Online Golang Compiler
+const SampleCodeGo = `//Online Golang Compiler
 
 package main
 import "fmt";
 
 func main() {
     fmt.Println("Hello, World!")
-}`
+}`;
 
 export const defaultFile = {
     cpp: {
@@ -63,8 +62,8 @@ export const defaultFile = {
         fileName: 'main',
         extension: '.go',
         content: SampleCodeGo,
-        isMain: true
-    }
+        isMain: true,
+    },
 };
 
 export const LANGUAGE_VERSIONS = {
@@ -72,5 +71,5 @@ export const LANGUAGE_VERSIONS = {
     java: '15.0.2',
     python: '3.10.0',
     javascript: '18.15.0',
-    go: '1.16.2'
+    go: '1.16.2',
 };
