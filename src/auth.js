@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { utcToIst } from './lib/convertTime';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -35,7 +36,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         await prisma.user.update({
                             where: { email },
                             data: {
-                                last_login: new Date(),
+                                last_login: utcToIst(new Date()),
                             },
                         });
                     }
