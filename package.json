@@ -29,16 +29,20 @@
         "next-auth": "^5.0.0-beta.25",
         "next-themes": "^0.4.4",
         "nextjs-toploader": "^3.7.15",
+        "node-cache": "^5.1.2",
         "prisma": "^6.1.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-loading-skeleton": "^3.5.0",
         "react-resizable-panels": "^2.1.7",
         "tailwind-merge": "^2.5.5",
-        "tailwindcss-animate": "^1.0.7"
+        "tailwindcss-animate": "^1.0.7",
+        "zod": "^3.24.1",
+        "zod-validation-error": "^3.4.0"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
+        "@prisma/extension-optimize": "^1.1.1",
         "eslint": "^9",
         "eslint-config-next": "15.1.2",
         "postcss": "^8",
