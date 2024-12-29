@@ -12,8 +12,9 @@ import { InputPanel } from './input';
 import { OutputPanel } from './output';
 import { defaultFile } from './SampleCode';
 import { Toolbar } from './toolbar';
+import { PublishPopupForm } from '../snippets/publish';
 
-export function OnlineCodeEditor() {
+export function OnlineCodeEditor({session}) {
     const editorRef = useRef(null);
     const [loadingOutput, setLoadingOutput] = useState(false);
     const [language, setLanguage] = useState('cpp');
@@ -23,9 +24,11 @@ export function OnlineCodeEditor() {
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
     const { theme: nextTheme } = useTheme();
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [theme, setTheme] = useState(() =>
         nextTheme === 'dark' ? 'vs-dark' : 'light',
     );
+
 
     useEffect(() => {
         if (nextTheme === 'dark') {
@@ -38,6 +41,7 @@ export function OnlineCodeEditor() {
     return (
         <div className="flex flex-col items-center justify-center">
             <Toolbar
+                session={session}
                 setLoadingOutput={setLoadingOutput}
                 setOutput={setOutput}
                 extension={extension}
@@ -50,6 +54,15 @@ export function OnlineCodeEditor() {
                 setLanguage={setLanguage}
                 setExtension={setExtension}
                 input={input}
+                isPopupOpen={isPopupOpen}
+                setIsPopupOpen={setIsPopupOpen}
+            />
+
+            <PublishPopupForm
+                setIsPopupOpen={setIsPopupOpen}
+                isPopupOpen={isPopupOpen}
+                code={code}
+                language={language}
             />
 
             <ResizablePanelGroup
@@ -66,6 +79,7 @@ export function OnlineCodeEditor() {
                         setCode={setCode}
                         editorRef={editorRef}
                         fontSize={fontSize}
+                        setFontSize={setFontSize}
                     />
                 </ResizablePanel>
                 <ResizableHandle

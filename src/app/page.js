@@ -1,7 +1,10 @@
+import { auth } from '@/auth';
 import { OnlineCodeEditor } from '@/components/codeEditor/onlineCodeEditor';
 
-export default function Page() {
-    return <OnlineCodeEditor />;
+export default async function Page() {
+    const session = await auth();
+
+    return <OnlineCodeEditor session={session} />;
 }
 
 //use components like drawer, toast

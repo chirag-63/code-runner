@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import { BulkSnippets } from '@/components/snippets/bulkSnippets';
 import { redirect } from 'next/navigation';
 
 export default async function Page() {
@@ -7,8 +8,8 @@ export default async function Page() {
         redirect('/');
     }
     return (
-        <div className="flex h-screen items-center justify-center text-lg">
-            Coming Soon
+        <div className="flex items-center justify-center">
+            <BulkSnippets/>
         </div>
     );
 }

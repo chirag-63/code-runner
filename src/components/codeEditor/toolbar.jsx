@@ -26,6 +26,8 @@ export function Toolbar({
     setLanguage,
     setExtension,
     input,
+    setIsPopupOpen,
+    session
 }) {
     return (
         <div className="flex w-full justify-between gap-5 bg-secondary pr-5">
@@ -56,12 +58,17 @@ export function Toolbar({
                         max={20}
                         min={12}
                         step={1}
-                        onValueChange={(val) => setFontSize(val[0])}
+                        onValueChange={(val) =>{
+                            setFontSize(val[0])
+                            localStorage.setItem('fontSize', val[0]);
+                        }}
                     />
                 </div>
-                {/* <Button className="h-7 w-16 px-5 py-2 font-medium">
-                        Publish
-                    </Button> */}
+                <Button disabled={!session} onClick={()=>{
+                    setIsPopupOpen(true)
+                }} className="h-7 w-16 px-5 py-2 font-medium">
+                    Publish
+                </Button>
                 <Button
                     onClick={() => {
                         downloadCodeHandler(code, extension);

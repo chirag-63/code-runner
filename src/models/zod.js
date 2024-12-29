@@ -6,7 +6,7 @@ import z from 'zod';
 // 97 - js
 // 100 - py
 // 105 - c++
-const allowedLanguageIds = [91, 95, 97, 100, 105];
+export const allowedLanguageIds = [91, 95, 97, 100, 105];
 
 export const createSnippetSchema = z.object({
     title: z

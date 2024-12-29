@@ -34,7 +34,7 @@ const Navbar = ({ isAuthenticated }) => {
     const [image, setImage] = useState('');
 
     return (
-        <div className="flex h-12 w-full items-center justify-between gap-6 rounded-none bg-[#763786] bg-card px-4 py-3">
+        <div className="flex h-12 w-full items-center justify-between gap-6 rounded-none bg-[#6c317a] sticky top-0 z-50 px-4 py-3">
             <ul className="flex items-center gap-10 text-card-foreground">
                 <li className="mx-16 flex select-none text-xl font-bold text-white">
                     <Link href="/" onDragStart={(e) => e.preventDefault()}>
@@ -96,6 +96,7 @@ const Navbar = ({ isAuthenticated }) => {
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                     onClick={() => setIsAlertOpen(true)}
+                                    className="focus:bg-destructive"
                                 >
                                     Logout
                                 </DropdownMenuItem>
@@ -143,7 +144,7 @@ const Navbar = ({ isAuthenticated }) => {
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                     <AlertDialogAction
-                                        onClick={() => setIsProfileOpen(false)}
+                                        // onClick={() => setIsProfileOpen(false)}
                                     >
                                         Close
                                     </AlertDialogAction>

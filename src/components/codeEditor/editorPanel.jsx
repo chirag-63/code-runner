@@ -11,6 +11,7 @@ export function EditorPanel({
     code,
     setCode,
     fontSize,
+    setFontSize
 }) {
     function handleEditorChange(value, event) {
         // here is the current value
@@ -32,9 +33,11 @@ export function EditorPanel({
             window.localStorage.getItem('CodeEditorTheme') || 'vs-dark';
         const savedLanguage =
             window.localStorage.getItem('PreferredLanguage') || 'cpp';
+        const fontSize = window.localStorage.getItem('fontSize') || 14;
         setTheme(savedTheme);
         setLanguage(savedLanguage);
         setCode(defaultFile[savedLanguage].content);
+        setFontSize(fontSize)
     }
 
     return (
