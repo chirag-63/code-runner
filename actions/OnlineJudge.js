@@ -20,7 +20,6 @@ export async function executeCode(language, sourceCode, input) {
         });
         return response.data;
     } catch (error) {
-        console.error('Error executing code:', error);
         throw error;
     }
 }

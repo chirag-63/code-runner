@@ -11,7 +11,6 @@ export function downloadCodeHandler(code, extension) {
         languageMapping[extension] || {};
 
     if (!mimeType) {
-        console.error('Unsupported language extension ' + extension);
         return;
     }
 

@@ -91,7 +91,7 @@ const Navbar = ({ isAuthenticated }) => {
                                     Profile
                                 </DropdownMenuItem>
                                 <DropdownMenuItem disabled>
-                                    Team
+                                    Settings
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem

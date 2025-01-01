@@ -51,7 +51,6 @@ export function PublishPopupForm({ isPopupOpen, setIsPopupOpen, code, language }
             setError("root", {
                 message: errorMessage || "something went wrong!!"
             })
-            console.error(errorMessage);
         }
     };
 

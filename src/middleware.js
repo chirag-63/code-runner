@@ -1,18 +1,23 @@
 export { auth as middleware } from '@/auth';
+
 import { NextResponse } from 'next/server';
 
-// export function middleware(request) {
-//     const { pathname } = request.nextUrl;
-//     if (pathname.startsWith('/api/auth/callback/google')) {
-//         return NextResponse.next();
-//     }
+export function middleware(request) {
+    const url = request.url;
+    const isApiRoute = url.includes('/api/');
 
-//     if (pathname.startsWith('/api/')) {
-//         return NextResponse.redirect(new URL('/', request.url));
-//     }
-//     return NextResponse.next();
-// }
+    const isGoogleAuthRoute = url.includes('/api/auth/google');
+    const referer = request.headers.get('referer');
 
-// export const config = {
-//     matcher: '/api/:path*',
-// };
+    if (isApiRoute && !isGoogleAuthRoute && !referer?.includes(request.nextUrl.origin)) {
+        return NextResponse.redirect(
+            new URL('/', request.nextUrl)
+        )
+    }
+
+    return NextResponse.next();
+}
+
+export const config = {
+    matcher: '/api/:path*'
+};

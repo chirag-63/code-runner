@@ -4,6 +4,7 @@ import { auth } from '@/auth';
 import { fromZodError } from 'zod-validation-error';
 import { createSnippetSchema } from '@/models/zod';
 import { utcToIst } from '@/lib/convertTime';
+import { nodeCache } from '@/lib/nodeCache';
 
 export async function POST(request) {
     const session = await auth();
@@ -59,12 +60,19 @@ export async function POST(request) {
             },
             select: {
                 snippet_id: true,
-            }
+            },
         });
 
+        await prisma.userSnippet.create({
+            data:{
+                user_id: user.id,
+                snippet_id: snippet.snippet_id
+            }
+        })
+
+        nodeCache.del(`snippets:${session.user.email}`)
         return NextResponse.json({ snippet }, { status: 201 });
     } catch (error) {
-        console.log(error);
         return NextResponse.json(
             { error: 'Internal Server Error' },
             { status: 500 },

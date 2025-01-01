@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { deleteSnippetSchema } from '@/models/zod';
 import { fromZodError } from 'zod-validation-error';
 import { auth } from '@/auth';
+import { nodeCache } from '@/lib/nodeCache';
 
 export async function DELETE(request) {
     const session = await auth();
@@ -35,7 +36,16 @@ export async function DELETE(request) {
             );
         }
 
-        if (snippet.author_id !== session.user?.email) {
+        const { id } = await prisma.user.findUnique({
+            where: {
+                email: session.user?.email,
+            },
+            select: {
+                id: true,
+            },
+        });
+
+        if (snippet.author_id !== id) {
             return NextResponse.json(
                 { error: 'You are not authorized to delete this snippet' },
                 { status: 403 },
@@ -46,9 +56,10 @@ export async function DELETE(request) {
            where: {snippet_id}
         });
 
+        nodeCache.del(`snippet:${snippet_id}`)
+        nodeCache.del(`snippets:${session.user.email}`)
         return NextResponse.json({ 'message':"snippet was deleted" });
     } catch (error) {
-        console.log(error);
         return NextResponse.json(
             { error: 'Internal Server Error' },
             { status: 500 },
