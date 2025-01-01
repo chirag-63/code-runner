@@ -3,6 +3,7 @@ import { auth } from '@/auth';
 import Navbar from '@/components/navbar/navbar';
 import { ThemeProvider } from '@/components/navbar/theme-provider';
 import NextTopLoader from 'nextjs-toploader';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 // const geistSans = Geist({
@@ -16,11 +17,11 @@ import './globals.css';
 // });
 
 export const metadata = {
-  title: "Code Runner",
-  description: "Online Code Editor for multiple languages",
-  icons: {
-    icon: '/icon.ico',
-  },
+    title: 'Code Runner',
+    description: 'Online Code Editor for multiple languages',
+    icons: {
+        icon: '/icon.ico',
+    },
 };
 
 export default async function RootLayout({ children }) {
@@ -42,6 +43,7 @@ export default async function RootLayout({ children }) {
                     <Navbar isAuthenticated={session?.user} />
                     {children}
                 </ThemeProvider>
+                <Analytics />
             </body>
         </html>
     );
