@@ -19,7 +19,7 @@ export function Snippet({ snippet_id }) {
             try {
                 setLoading(true);
                 const response = await axios.get(`/api/snippets/${snippet_id}`);
-                setSnippet(response.data.snippet);
+                setSnippet(response.data.snippetWithDetails);
             } catch (err) {
                 setError(err.response?.data?.message || 'Failed to fetch snippet, try reload');
             } finally {

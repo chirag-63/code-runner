@@ -12,6 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             clientSecret: process.env.AUTH_GOOGLE_SECRET,
         }),
     ],
+    trustHost: true,
     secret: process.env.AUTH_SECRET,
     callbacks: {
         async signIn({ user, account }) {
