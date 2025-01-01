@@ -1,8 +1,11 @@
-export { auth as middleware } from '@/auth';
-
+import { auth } from '@/auth';
 import { NextResponse } from 'next/server';
 
-export function middleware(request) {
+export async function middleware(request) {
+
+    const authResult = await auth(request);
+    if (authResult) return authResult;
+
     const url = request.url;
     const isApiRoute = url.includes('/api/');
 
