@@ -11,10 +11,11 @@ import { Slider } from '@/components/ui/slider';
 import { changeLanguage } from '@/lib/changeLanguage';
 import { downloadCodeHandler } from '@/lib/downloadCode';
 import { RunCodeHandler } from '@/lib/runCode';
-import { Download } from 'lucide-react';
+import { Download, Loader2 } from 'lucide-react';
 
 export function Toolbar({
     setLoadingOutput,
+    loadingOutput,
     setOutput,
     extension,
     fontSize,
@@ -48,8 +49,9 @@ export function Toolbar({
                         );
                     }}
                     className="h-7 w-16 bg-green-500 py-2 font-medium hover:bg-green-600"
+                    disabled={loadingOutput}
                 >
-                    Run
+                    {loadingOutput ? <Loader2 className='animate-spin' /> : "Run"}
                 </Button>
                 <div className="flex h-full w-32 select-none items-center gap-2 rounded-lg bg-primary-foreground px-3 text-sm hover:cursor-pointer">
                     <div>Font</div>
