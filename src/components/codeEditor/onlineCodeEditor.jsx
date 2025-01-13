@@ -13,6 +13,7 @@ import { OutputPanel } from './output';
 import { defaultFile } from './SampleCode';
 import { Toolbar } from './toolbar';
 import { PublishPopupForm } from '../snippets/publish';
+import { RunCodeHandler } from '@/lib/runCode';
 
 export function OnlineCodeEditor({session}) {
     const editorRef = useRef(null);
@@ -43,6 +44,7 @@ export function OnlineCodeEditor({session}) {
             <Toolbar
                 session={session}
                 setLoadingOutput={setLoadingOutput}
+                loadingOutput={loadingOutput}
                 setOutput={setOutput}
                 extension={extension}
                 fontSize={fontSize}
@@ -67,7 +69,13 @@ export function OnlineCodeEditor({session}) {
 
             <ResizablePanelGroup
                 direction="horizontal"
-                className="max-w-md md:min-w-full"
+                className="md:min-w-full"
+                onKeyDown={(e) => {
+                    if (e.ctrlKey && e.key === "'") {
+                        e.preventDefault();
+                        RunCodeHandler(setLoadingOutput, setOutput, language, code, input);
+                    }
+                }}
             >
                 <ResizablePanel defaultSize={70} className="min-w-[40%]">
                     <EditorPanel
