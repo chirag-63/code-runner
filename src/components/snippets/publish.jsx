@@ -16,6 +16,7 @@ import { Switch } from "../ui/switch"
 import { getIdFromLanguage } from "@/lib/getLanguageId"
 import axios from "axios"
 import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 // import { zodResolver } from "@hookform/resolvers/zod" - problem with this package re-install and check later
 // import { createSnippetSchema } from "@/models/zod"
 
@@ -110,7 +111,9 @@ export function PublishPopupForm({ isPopupOpen, setIsPopupOpen, code, language }
                     {errors.root && (<div className="text-red-500 text-center text-sm ml-1">{errors.root.message}</div>)}
                 </form>
                 <DialogFooter>
-                    <Button className="px-8 dark:text-white" form="publishForm" type="submit">Post</Button>
+                    <Button className="px-8 dark:text-white" form="publishForm" type="submit" disabled={isSubmitting} >
+                        {isSubmitting ? <Loader2 className="animate-spin" /> : "Post"}
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
